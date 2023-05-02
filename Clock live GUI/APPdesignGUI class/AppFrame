@@ -1,0 +1,83 @@
+package Code;
+import java.awt.*;
+import java.awt.FlowLayout.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import javax.swing.*;
+
+public class AppFrame extends JFrame
+{
+    public String CurrTime,CurrDay,CurrDate;
+
+SimpleDateFormat time,day,date;
+JLabel label,dlabel,dtlabel,mylabel;
+JPanel panel;
+    public AppFrame()
+    {
+        day = new SimpleDateFormat("EEEE");
+        dlabel = new JLabel();
+        dlabel.setForeground(Color.WHITE);
+        dlabel.setBackground(Color.BLACK);
+        dlabel.setFont(new Font("Arial", Font.BOLD,50));
+        dlabel.setOpaque(true);
+
+        date = new SimpleDateFormat("dd/MM/yyyy");
+        dtlabel = new JLabel();
+        mylabel = new JLabel("Copyright by Aboubakar Arisar");
+
+        dtlabel.setForeground(Color.WHITE);
+        dtlabel.setBackground(Color.BLACK);
+        dtlabel.setFont(new Font("Arial", Font.BOLD,50));
+        dtlabel.setOpaque(true);
+
+
+        time =  new SimpleDateFormat("hh:mm:ss a");;
+        label = new JLabel();
+        label.setForeground(Color.PINK);
+        label.setBackground(Color.BLACK);
+        label.setFont(new Font("Arial", Font.BOLD,50));
+        label.setOpaque(true);
+        panel = new JPanel();
+        panel.setSize(100, 100);
+        panel.add(label);
+        panel.add(dlabel);
+        panel.add(dtlabel);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setTitle("AB Clock");
+        this.setLayout(new BorderLayout());
+        this.setSize(350,300);
+        /*this.add(label);
+        this.add(dlabel);
+        this.add(dtlabel);
+        */
+        this.add(panel,BorderLayout.CENTER);
+        this.add(mylabel,BorderLayout.SOUTH);
+        this.setResizable(false);
+        this.setVisible(true);
+        moveClock();
+    }
+    public void moveClock()
+    {
+        while(true)
+        {
+            CurrTime = time.format(Calendar.getInstance().getTime());
+            label.setText(CurrTime);
+
+
+            CurrDay = day.format(Calendar.getInstance().getTime());
+            dlabel.setText(CurrDay);
+
+            CurrDate = date.format(Calendar.getInstance().getTime());
+            dtlabel.setText(CurrDate);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+    }
+}
+
