@@ -1,0 +1,34 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
+public class frames
+{
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame();
+        ImageIcon image = new ImageIcon("pindari.png");
+        frame.setIconImage(image.getImage());
+        frame.setLocation(50,50);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        JButton button =  new JButton("Click");
+
+        button.setBounds(200,100,100,50);
+        JTextField text = new JTextField();
+        JPanel panel = new JPanel();
+        panel.setLocation(50,50);
+        frame.setTitle("Aboubakar");
+        panel.setBackground(Color.DARK_GRAY);
+        frame.add(panel);
+
+        frame.add(button);
+        //button.addActionListener(this);
+        frame.setSize(450,500);
+        frame.setVisible(true);
+
+    }
+}
