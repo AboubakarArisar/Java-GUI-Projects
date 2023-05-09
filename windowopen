@@ -1,0 +1,109 @@
+/*
+import javax.swing.*;
+import java.awt.*;
+
+public class OpenWindow  {
+    JLabel welcomeLabel, player1Label, player2Label;
+    JFrame frame;
+    Container contentPane;
+    JTextField player1Field, player2Field;
+    JPanel labelPanel, textFieldPanel, buttonPanel;
+    JButton submitButton;
+
+    public OpenWindow() {
+        frame = new JFrame("Tic Tac Toe");
+        contentPane = frame.getContentPane();
+        contentPane.setLayout(new BorderLayout());
+
+        // create the welcome label and add it to the NORTH position
+        welcomeLabel = new JLabel("Welcome to Tic Tac Toe!");
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        welcomeLabel.setForeground(Color.BLUE);
+        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(welcomeLabel, BorderLayout.NORTH);
+
+        // create the player labels and text fields and add them to a panel with GridLayout
+        player1Label = new JLabel("Player 1:");
+        player2Label = new JLabel("Player 2:");
+        player1Field = new JTextField(20);
+        player2Field = new JTextField(20);
+        labelPanel = new JPanel(new GridLayout(2, 1));
+        labelPanel.add(player1Label);
+        labelPanel.add(player2Label);
+        textFieldPanel = new JPanel(new GridLayout(2, 1));
+        textFieldPanel.setSize(80,30);
+        labelPanel.setSize(80,30);
+        player1Field.setBackground(Color.BLACK);
+        player1Field.setForeground(Color.GREEN);
+        player2Field.setBackground(Color.BLACK);
+        player2Field.setForeground(Color.GREEN);
+        player1Field.setPreferredSize(new Dimension(80,40));
+        player2Field.setPreferredSize(new Dimension(80,40));
+        textFieldPanel.add(player1Field);
+        textFieldPanel.add(player2Field);
+        contentPane.add(labelPanel, BorderLayout.WEST);
+        contentPane.add(textFieldPanel, BorderLayout.CENTER);
+
+        submitButton = new JButton("Submit");
+        submitButton.setPreferredSize(new Dimension(100,68));
+        submitButton.setBackground(Color.YELLOW);
+        buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.add(submitButton);
+        contentPane.add(buttonPanel, BorderLayout.SOUTH);
+
+        frame.setSize(500, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new OpenWindow();
+    }
+}
+*/
+
+import javax.swing.*;
+import java.awt.*;
+
+public class OpenWindow {
+    JLabel l1, l2, l3;
+    JFrame frame;
+    Container c;
+    JTextField tf1, tf2;
+    JPanel panel;
+    JButton submit;
+
+    public OpenWindow() {
+        frame = new JFrame("Pindari Coders");
+        c = frame.getContentPane();
+
+        l1 = new JLabel("Welcome to the Game");
+        l1.setFont(new Font("Arial", Font.BOLD, 25));
+        l1.setForeground(Color.GREEN);
+        l1.setHorizontalAlignment(SwingConstants.CENTER);
+        c.setBackground(Color.GRAY);
+
+        l2 = new JLabel("Player 1:");
+        tf1 = new JTextField(20);
+        tf1.setBackground(Color.BLACK);
+        tf1.setForeground(Color.GREEN);
+
+        l3 = new JLabel("Player 2:");
+        tf2 = new JTextField(20);
+        tf2.setBackground(Color.BLACK);
+        tf2.setForeground(Color.GREEN);
+
+        c.add(l1, BorderLayout.NORTH);
+        l2.setBounds(30,20,30,30);
+
+        frame.setSize(500, 350);
+        frame.add(l2);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new OpenWindow();
+    }
+}
+
