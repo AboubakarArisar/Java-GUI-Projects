@@ -1,0 +1,307 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+public class Game extends JFrame implements ActionListener
+{
+    static String p1, p2;
+    public static void moveval(String s1, String s2)
+    {
+        p1 = s1;
+        p2 = s2;
+    }
+    Random rand = new Random();
+
+    JMenu file;
+    JMenuItem pagain,exit;
+    JMenuBar bar;
+    JButton buttons[] = new JButton[9];
+    JLabel my ;
+    JPanel buttonsPanel = new JPanel();
+    JPanel ab = new JPanel();
+
+    JTextField tf = new JTextField();
+    boolean player1Turn;
+    int counter = 0;
+    public void check()
+    {
+
+        if(buttons[0].getText().equals("X") && buttons[1].getText().equals("X") && buttons[2].getText().equals("X"))
+        {
+            XWins(0,1,2);
+        }
+        else draw(0,1,2);
+
+        if(buttons[3].getText().equals("X") && buttons[4].getText().equals("X") && buttons[5].getText().equals("X"))
+        {
+            XWins(3,4,5);
+        }
+        else draw(3,4,5);
+
+
+        if(buttons[6].getText().equals("X") && buttons[7].getText().equals("X") && buttons[8].getText().equals("X"))
+        {
+            XWins(6,7,8);
+        }
+        else draw(6,7,8);
+
+
+        if(buttons[0].getText().equals("X") && buttons[4].getText().equals("X") && buttons[8].getText().equals("X"))
+        {
+            XWins(0,4,8);
+        }
+        else draw(0,4,8);
+
+
+        if(buttons[2].getText().equals("X") && buttons[4].getText().equals("X") && buttons[6].getText().equals("X"))
+        {
+            XWins(2,4,6);
+        }
+        else draw(2,4,6);
+
+        if(buttons[0].getText().equals("X") && buttons[3].getText().equals("X") && buttons[6].getText().equals("X"))
+        {
+            XWins(0,3,6);
+        }
+        else draw(0,3,6);
+
+        if(buttons[1].getText().equals("X") && buttons[4].getText().equals("X") && buttons[7].getText().equals("X"))
+        {
+            XWins(1,4,7);
+        }
+        else draw(1,4,7);
+
+
+        if(buttons[2].getText().equals("X") && buttons[5].getText().equals("X") && buttons[8].getText().equals("X"))
+        {
+            XWins(2,5,8);
+        }
+        else draw(2,5,8);
+
+
+
+
+        if(buttons[0].getText().equals("O") && buttons[1].getText().equals("O") && buttons[2].getText().equals("O"))
+        {
+            OWins(0,1,2);
+        }
+        else draw(0,1,2);
+
+
+        if(buttons[3].getText().equals("O") && buttons[4].getText().equals("O") && buttons[5].getText().equals("O"))
+        {
+            OWins(3,4,5);
+        }
+        else draw(3,4,5);
+
+        if((buttons[6].getText().equals("O") && buttons[7].getText().equals("O") && buttons[8].getText().equals("O")))
+        {
+            OWins(6,7,8);
+        }
+        else draw(6,7,8);
+
+        if(buttons[0].getText().equals("O") && buttons[4].getText().equals("O") && buttons[8].getText().equals("O"))
+        {
+            OWins(0,4,8);
+        }
+        else draw(0,4,8);
+
+        if(buttons[2].getText().equals("O") && buttons[4].getText().equals("O") && buttons[6].getText().equals("O"))
+        {
+            OWins(2,4,6);
+        }
+        else draw(2,4,6);
+
+        if(buttons[0].getText().equals("O") && buttons[3].getText().equals("O") && buttons[6].getText().equals("O"))
+        {
+            OWins(0,3,6);
+        }
+        else draw(0,3,6);
+
+        if(buttons[1].getText().equals("O") && buttons[4].getText().equals("O") && buttons[7].getText().equals("O"))
+        {
+            OWins(1,4,7);
+        }
+        else draw(1,4,7);
+
+        if(buttons[2].getText().equals("O") && buttons[5].getText().equals("O") && buttons[8].getText().equals("O"))
+        {
+            OWins(2,5,8);
+        }
+        else draw(2,5,8);
+
+
+
+
+
+
+    }
+    public void XWins(int x, int y, int z)
+    {
+        buttons[x].setBackground(Color.PINK);
+        buttons[y].setBackground(Color.PINK);
+        buttons[z].setBackground(Color.PINK);
+        for(int i=0; i<9; i++)
+        {
+            buttons[i].setEnabled(false);
+        }
+        tf.setText(p1+" WINS");
+    }
+    public void OWins(int x, int y, int z)
+    {
+
+        buttons[x].setBackground(Color.PINK);
+        buttons[y].setBackground(Color.PINK);
+        buttons[z].setBackground(Color.PINK);
+        for(int i=0; i<9; i++)
+        {
+            buttons[i].setEnabled(false);
+        }
+        tf.setText(p2+" WINS");
+    }
+    public void draw(int x, int y, int z)
+    {
+
+        counter+=1;
+
+        if(counter ==144)
+        {
+            for(int i = 0; i<9; i++)
+            {
+                buttons[i].setBackground(Color.RED);
+                buttons[i].setEnabled(false);
+            }
+            tf.setText("Draw");
+        }
+
+    }
+    public void Turn()
+    {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if(rand.nextInt(2)==0)
+        {
+            player1Turn = true;
+            tf.setText(p1+" Turn");
+            tf.setHorizontalAlignment(tf.CENTER);
+            tf.setEditable(false);
+            tf.setFont(new Font("Arial", Font.BOLD,85));
+            tf.setBackground(Color.BLACK);
+            tf.setForeground(Color.WHITE);
+            tf.setOpaque(true);
+        }
+        else
+        {
+            player1Turn = false;
+            tf.setText(p2+" Turn");
+            tf.setHorizontalAlignment(tf.CENTER);
+            tf.setEditable(false);
+            tf.setFont(new Font("Arial", Font.BOLD,85));
+            tf.setBackground(Color.BLACK);
+            tf.setForeground(Color.WHITE);
+            tf.setOpaque(true);
+        }
+    }
+    public Game()
+    {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(800,700);
+        this.setLocationRelativeTo(null);
+        this.getContentPane().setBackground(new Color(50,50,50));
+        this.setLayout(new BorderLayout());
+
+        file = new JMenu("File");
+        pagain = new JMenuItem("Play Again");
+        exit = new JMenuItem("Exit");
+        file.add(pagain);
+        file.add(exit);
+        bar = new JMenuBar();
+        bar.add(file);
+        this.setJMenuBar(bar);
+        pagain.addActionListener(this);
+        exit.addActionListener(this);
+        my  = new JLabel("Copyright Claims : Aboubakar Arisar");
+        my.setFont(new Font("Arial", Font.BOLD,35));
+        my.setHorizontalAlignment((int) 0.5f);
+        my.setForeground(Color.white);
+        my.setSize(30,40);
+        buttonsPanel.setLayout(new GridLayout(3,3));
+        buttonsPanel.setBackground(Color.darkGray);
+        for(int i = 0; i < buttons.length; i++)
+        {
+            buttons[i] = new JButton(String.valueOf((i+1)));
+            buttons[i].setFocusable(false);
+
+            buttonsPanel.add(buttons[i]);
+            buttons[i].setFont(new Font("Arial",Font.BOLD,120));
+            buttons[i].addActionListener(this);
+        }
+
+
+        tf.setText("Tic Tac Toe");
+
+       // tf.setHorizontalAlignment(tf.CENTER);
+        tf.setEditable(false);
+        tf.setHorizontalAlignment(JLabel.CENTER);
+        tf.setFont(new Font("Arial", Font.BOLD,85));
+        tf.setBackground(Color.BLACK);
+        tf.setForeground(Color.WHITE);
+        tf.setOpaque(true);
+
+        this.add(tf,BorderLayout.NORTH);
+        this.add(my,BorderLayout.SOUTH);
+        this.add(buttonsPanel, BorderLayout.CENTER);
+
+        Turn();
+        this.setTitle("Tic Tac Toe By Aboubakar Arisar");
+        this.setVisible(true);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        for (int i = 0; i < 9; i++) {
+            if (e.getSource() == buttons[i]) {
+                if (player1Turn) {
+                    if (buttons[i].getText() .equals( String.valueOf((i+1)))) {
+                        buttons[i].setForeground(Color.YELLOW);
+                        buttons[i].setText("X");
+                        player1Turn = false;
+                        tf.setText(p2 + " Turn");
+                        check();
+
+
+                    }
+
+                } else {
+
+                    if (buttons[i].getText().equals(String.valueOf((i+1)))) {
+                        buttons[i].setForeground(Color.BLUE);
+                        buttons[i].setText("O");
+                        player1Turn = true;
+                        tf.setText(p1 + " Turn");
+                        check();
+
+
+                    }
+
+                }
+            }
+            if (e.getSource() == pagain) {
+                this.dispose();
+                new OpenWindow();
+            }
+            if (e.getSource() == exit) {
+                JOptionPane.showConfirmDialog(this, "Are you sure you want to exit the game");
+                System.exit(0);
+            }
+
+        }
+    }
+}
