@@ -1,0 +1,54 @@
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+
+public class redgreen implements ActionListener
+{
+    JFrame frame ;
+    JButton btnRed,btnGreen;
+    Container c;
+    void design()
+    {
+        frame = new JFrame("Test Color");
+        btnGreen = new JButton("Green");
+        btnRed = new JButton("Red");
+        btnRed.setFocusable(false);
+        btnGreen.setFocusable(false);
+        c = frame.getContentPane();
+
+        frame.setSize(300,200);
+        c.setLayout(new FlowLayout());
+
+        c.add(btnGreen);
+
+        btnGreen.addActionListener(this);
+        c.add(btnRed);
+        btnRed.addActionListener(this);
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    redgreen()
+    {
+        design();
+    }
+    public static void main(String arg[])
+    {
+        new redgreen();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if(ae.getSource() == btnGreen)
+        {
+            c.setBackground(Color.GREEN);
+            btnGreen.setText("Green Click");
+        }
+        if(ae.getSource() == btnRed)
+        {
+            c.setBackground(Color.RED);
+            btnRed.setText("Red Click");
+        }
+    }
+}
