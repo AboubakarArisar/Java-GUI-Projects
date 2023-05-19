@@ -1,0 +1,99 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class GPACalculatorGUI extends JFrame {
+    private JLabel coursesLabel;
+    private JTextField coursesTextField;
+    private JButton calculateButton;
+    private JTextArea resultTextArea;
+
+    public GPACalculatorGUI() {
+        setTitle("GPA Calculator");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+
+        coursesLabel = new JLabel("Enter the number of courses:");
+        coursesTextField = new JTextField(10);
+        calculateButton = new JButton("Enter");
+        calculateButton.setFocusable(false);
+        resultTextArea = new JTextArea(20, 25);
+        resultTextArea.setFont(new Font("Arial", Font.BOLD,18));
+        resultTextArea.setLineWrap(true);
+        resultTextArea.setAlignmentX(SwingConstants.CENTER);
+        resultTextArea.setAlignmentY(SwingConstants.CENTER);
+        resultTextArea.setBackground(Color.BLACK);
+        resultTextArea.setForeground(Color.GREEN);
+        resultTextArea.setSelectedTextColor(Color.WHITE);
+        resultTextArea.setEditable(false);
+
+        add(coursesLabel);
+        add(coursesTextField);
+        add(calculateButton);
+        add(new JScrollPane(resultTextArea));
+
+        calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateGPA();
+            }
+        });
+        InputMap inputMap = calculateButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enterKey");
+
+        // Create an ActionMap and associate it with the button
+        ActionMap actionMap = calculateButton.getActionMap();
+        actionMap.put("enterKey", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateGPA();
+            }
+        });
+    }
+
+    private void calculateGPA() {
+        int courses = Integer.parseInt(coursesTextField.getText());
+        int chrs = 0;
+        double gpa = 0.0;
+
+        double[] grades = new double[courses];
+        int[] credithrs = new int[courses];
+        double[] totGrd = new double[courses];
+
+        for (int i = 0; i < courses; i++) {
+            String gradeInput = JOptionPane.showInputDialog("Enter GPA in course " + (i + 1) + ":");
+            grades[i] = Double.parseDouble(gradeInput);
+
+            String creditInput = JOptionPane.showInputDialog("Enter credit hours in course " + (i + 1) + ":");
+            credithrs[i] = Integer.parseInt(creditInput);
+        }
+
+        for (int k = 0; k < courses; k++) {
+            totGrd[k] = grades[k] * credithrs[k];
+        }
+
+        for (int j = 0; j < courses; j++) {
+            chrs += credithrs[j];
+            gpa += totGrd[j];
+        }
+
+        double finalGpa = gpa / chrs;
+
+        resultTextArea.setText("Your GPA is: " + finalGpa);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GPACalculatorGUI gpaCalculator = new GPACalculatorGUI();
+                gpaCalculator.setSize(400, 150);
+                gpaCalculator.setLocationRelativeTo(null);
+              gpaCalculator.setResizable(false);
+                gpaCalculator.setVisible(true);
+            }
+        });
+    }
+}
